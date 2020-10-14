@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: gym-track
+    container_name: gym-track-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - gym-track
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: gym-track-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    volumes_from:
+      - app
+    networks:
+      - gym-track
+  db:
+    image: mysql:5.7
+    container_name: gym-track-db
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./db:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 3316:3306
+    networks:
+      - gym-track
+networks:
+  gym-track:
+    driver: bridge
