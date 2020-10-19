@@ -21,6 +21,7 @@ class CreateTableGyms extends Migration
             $table->integer('number');
             $table->string('complement')->nullable();
             $table->string('zipcode');
+            $table->string('city');
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
