@@ -36,6 +36,6 @@ class CreateTableGyms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_gyms');
+        Schema::dropIfExists('gyms');
     }
 }
