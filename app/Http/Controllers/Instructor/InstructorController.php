@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Instructor;
 
 use \App\Http\Controllers\Controller;
 use App\Entities\Instructor;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -29,12 +30,22 @@ class InstructorController extends Controller
      *          response="200",
      *          description="Retorna todos os instrutores cadastrados"
      *      ),
+     *     @OA\Response (
+     *          response="500",
+     *          description="Retorna a mensagem do erro interno."
+     *     )
      * )
      */
 
     public function index()
     {
-        return response()->json(Instructor::all(), 200);
+        try {
+            return response()->json(Instructor::all(), 200);
+        }
+        catch (\Exception $exception)
+        {
+            return response($exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -61,12 +72,23 @@ class InstructorController extends Controller
      *          response="404",
      *          description="Instrutor não encontrado"
      *     ),
+     *     @OA\Response (
+     *          response="500",
+     *          description="Retorna a mensagem do erro interno."
+     *     )
      * )
      */
 
     public function show(int $id)
     {
-        return response()->json(Instructor::findOrFail($id), 200);
+        try {
+            $instructor = Instructor::findOrFail($id);
+            return response()->json($instructor, 200);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return response('Instructor not found', 404);
+        } catch (\Exception $exception) {
+            return response($exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -142,6 +164,10 @@ class InstructorController extends Controller
      *          response="400",
      *          description="Parametros reprovaram na validação."
      *     ),
+     *     @OA\Response (
+     *          response="500",
+     *          description="Retorna a mensagem do erro interno."
+     *     )
      * )
      */
 
@@ -152,7 +178,6 @@ class InstructorController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
 
         return response()->json(Instructor::create($request->all()), 201);
     }
@@ -233,32 +258,49 @@ class InstructorController extends Controller
      *          )
      *      ),
      *      @OA\Response(
-     *          response="201",
-     *          description="Retorna o instrutor que foi criado."
+     *          response="200",
+     *          description="Instrutor atualizado"
      *      ),
      *     @OA\Response (
-     *          response="400",
+     *          response="422",
      *          description="Parametros reprovaram na validação."
      *     ),
      *     @OA\Response (
      *          response="404",
      *          description="Instrutor não encontrado"
+     *     ),
+     *     @OA\Response (
+     *          response="500",
+     *          description="Retorna a mensagem do erro interno."
      *     )
      * )
      */
 
     public function update(Request $request, int $id)
     {
-        $validator = $this->validateRequest($request->all(), $id);
+        try {
 
-        if ($validator->fails()) {
-            return response($validator->errors(), 400);
+            $instructor = Instructor::findOrFail($id);
+
+            $validator = $this->validateRequest($request->all(), $id);
+
+            if ($validator->fails()) {
+                return response($validator->errors(), 422);
+            }
+
+            $instructor->update($request->all());
+
+            return response()->json(['instructor' => $instructor], 200);
+
         }
-
-        $instructor = Instructor::findOrFail($id);
-        $instructor->update($request->all());
-
-        return response()->json($instructor, 200);
+        catch (ModelNotFoundException $e)
+        {
+            return response('Instructor not found', 404);
+        }
+        catch (\Exception $exception)
+        {
+            return response($exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -285,13 +327,27 @@ class InstructorController extends Controller
      *          response="404",
      *          description="Instrutor não encontrado"
      *     ),
+     *     @OA\Response (
+     *          response="500",
+     *          description="Retorna a mensagem do erro interno."
+     *     )
      * )
      */
 
     public function delete(int $id)
     {
-        Instructor::findOrFail($id)->delete();
-        return response('Instructor deleted', 200);
+        try {
+            Instructor::findOrFail($id)->delete();
+            return response('Instructor deleted', 200);
+        }
+        catch (ModelNotFoundException $exception)
+        {
+            return response('Instructor not found', 404);
+        }
+        catch (\Exception $exception)
+        {
+            return response($exception->getMessage(), 500);
+        }
     }
 
     protected function validateRequest(array $request, $id = 0)
