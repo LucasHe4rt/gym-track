@@ -1,0 +1,328 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gym-track API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/gyms": {
+            "get": {
+                "tags": [
+                    "Academias"
+                ],
+                "summary": "Lista todos os academias",
+                "description": "Array de objetos contendo todos os academias cadastrados",
+                "operationId": "App\\Http\\Controllers\\Gym\\GymController::index",
+                "responses": {
+                    "200": {
+                        "description": "Retorna todos os instrutores cadastrados"
+                    },
+                    "500": {
+                        "description": "Retorna erro que ocorreu."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Academias"
+                ],
+                "summary": "Cria uma academia",
+                "description": "Cria uma academia",
+                "operationId": "App\\Http\\Controllers\\Gym\\GymController::store",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "neighborhood",
+                        "in": "query",
+                        "description": "Bairro da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "street",
+                        "in": "query",
+                        "description": "Rua da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Numero (endereço) da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "complement",
+                        "in": "query",
+                        "description": "Referencia da localização da academia",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "zipcode",
+                        "in": "query",
+                        "description": "CEP da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Cidade da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Telefone da academia",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Senha da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Retorna a academia que foi criado."
+                    },
+                    "422": {
+                        "description": "Parametros reprovaram na validação."
+                    },
+                    "500": {
+                        "description": "Retorna erro que ocorreu."
+                    }
+                }
+            }
+        },
+        "/api/gyms/{id}": {
+            "get": {
+                "tags": [
+                    "Academias"
+                ],
+                "summary": "Busca uma academia",
+                "description": "Busca a academia com o id passado por parametro",
+                "operationId": "App\\Http\\Controllers\\Gym\\GymController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Gym id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna a academia"
+                    },
+                    "404": {
+                        "description": "Instrutor não encontrado"
+                    },
+                    "500": {
+                        "description": "Retorna erro que ocorreu."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Academias"
+                ],
+                "summary": "Atualiza uma academia",
+                "description": "Atualiza uma academia pelo id",
+                "operationId": "App\\Http\\Controllers\\Gym\\GymController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "neighborhood",
+                        "in": "query",
+                        "description": "Bairro da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "street",
+                        "in": "query",
+                        "description": "Rua da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Numero (endereço) da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "complement",
+                        "in": "query",
+                        "description": "Referencia da localização da academia",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "zipcode",
+                        "in": "query",
+                        "description": "CEP da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Cidade da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Telefone da academia",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Senha da academia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Retorna a academia que foi atualizada."
+                    },
+                    "422": {
+                        "description": "Parametros reprovaram na validação."
+                    },
+                    "404": {
+                        "description": "Academia não encontrado."
+                    },
+                    "500": {
+                        "description": "Retorna erro que ocorreu."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Academias"
+                ],
+                "summary": "Deleta uma academia",
+                "description": "Deleta a academia com o id passado por parametro",
+                "operationId": "App\\Http\\Controllers\\Gym\\GymController::delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Gym id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleta o academia"
+                    },
+                    "404": {
+                        "description": "Academia não encontrada"
+                    },
+                    "500": {
+                        "description": "Retorna erro que ocorreu."
+                    }
+                }
+            }
+        }
+    }
+}
