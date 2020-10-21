@@ -1,0 +1,249 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gym-track API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/instructors": {
+            "get": {
+                "tags": [
+                    "Instrutores"
+                ],
+                "summary": "Lista todos os instrutores",
+                "description": "Array de objetos contendo todos os intrutores cadastrados",
+                "operationId": "App\\Http\\Controllers\\Instructor\\InstructorController::index",
+                "responses": {
+                    "200": {
+                        "description": "Retorna todos os instrutores cadastrados"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Instrutores"
+                ],
+                "summary": "Adiciona um novo instrutor",
+                "description": "Cria um novo instrutor",
+                "operationId": "App\\Http\\Controllers\\Instructor\\InstructorController::store",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "telefone do instrutor",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "senha do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "arrive",
+                        "in": "query",
+                        "description": "horario de entrada do instrutor",
+                        "required": true
+                    },
+                    {
+                        "name": "leave",
+                        "in": "query",
+                        "description": "horario de saída do instrutor",
+                        "required": true
+                    },
+                    {
+                        "name": "gym_id",
+                        "in": "query",
+                        "description": "Id da academia que o instrutor irá pertencer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Retorna o instrutor que foi criado."
+                    },
+                    "400": {
+                        "description": "Parametros reprovaram na validação."
+                    }
+                }
+            }
+        },
+        "/api/instructors/{id}": {
+            "get": {
+                "tags": [
+                    "Instrutores"
+                ],
+                "summary": "Busca um instrutor",
+                "description": "Busca o instrutor com o id passado por parametro",
+                "operationId": "App\\Http\\Controllers\\Instructor\\InstructorController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Instructor id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o instrutor"
+                    },
+                    "404": {
+                        "description": "Instrutor não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Instrutores"
+                ],
+                "summary": "Atualiza um instrutor",
+                "description": "Atualiza um instrutor pelo id",
+                "operationId": "App\\Http\\Controllers\\Instructor\\InstructorController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "telefone do instrutor",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "senha do instrutor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "arrive",
+                        "in": "query",
+                        "description": "horario de entrada do instrutor",
+                        "required": true
+                    },
+                    {
+                        "name": "leave",
+                        "in": "query",
+                        "description": "horario de saída do instrutor",
+                        "required": true
+                    },
+                    {
+                        "name": "gym_id",
+                        "in": "query",
+                        "description": "Id da academia que o instrutor irá pertencer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Retorna o instrutor que foi criado."
+                    },
+                    "400": {
+                        "description": "Parametros reprovaram na validação."
+                    },
+                    "404": {
+                        "description": "Instrutor não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Instrutores"
+                ],
+                "summary": "Deleta um instrutor",
+                "description": "Deleta o instrutor com o id passado por parametro",
+                "operationId": "App\\Http\\Controllers\\Instructor\\InstructorController::delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Instructor id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleta o instrutor"
+                    },
+                    "404": {
+                        "description": "Instrutor não encontrado"
+                    }
+                }
+            }
+        }
+    }
+}
