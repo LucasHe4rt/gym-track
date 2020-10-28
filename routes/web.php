@@ -19,10 +19,24 @@ $router->get('/', function () use ($router) {
 
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
+    $router->group([
+        'prefix' => 'gyms',
+        'namespace' => 'Gym'
+    ], function () use ($router)
+    {
+        $router->get('/', 'GymController@index');
+        $router->get('/{id}', 'GymController@show');
+        $router->post('/', 'GymController@store');
+        $router->put('/{id}', 'GymController@update');
+        $router->delete('/{id}', 'GymController@delete');
+    });
+
     $router->group([
         'namespace' => 'Instructor',
         'prefix' => 'instructors'
-    ], function () use ($router) {
+    ], function () use ($router)
+    {
         $router->get('/', 'InstructorController@index');
         $router->get('/{id}', 'InstructorController@show');
         $router->post('/', 'InstructorController@store');
