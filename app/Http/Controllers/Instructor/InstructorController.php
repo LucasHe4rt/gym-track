@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Instructor;
 
 use \App\Http\Controllers\Controller;
-use App\Entities\Instructor;
+use App\Models\Instructor;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,7 +40,7 @@ class InstructorController extends Controller
     public function index()
     {
         try {
-            return response()->json(Instructor::all(), 200);
+            return response()->json(['instructors' => Instructor::all()], 200);
         }
         catch (\Exception $exception)
         {
@@ -82,8 +82,7 @@ class InstructorController extends Controller
     public function show(int $id)
     {
         try {
-            $instructor = Instructor::findOrFail($id);
-            return response()->json($instructor, 200);
+            return response()->json(['instructor' => Instructor::findOrFail($id)], 200);
         } catch (ModelNotFoundException $modelNotFoundException) {
             return response('Instructor not found', 404);
         } catch (\Exception $exception) {
@@ -179,7 +178,7 @@ class InstructorController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        return response()->json(Instructor::create($request->all()), 201);
+        return response()->json(['instructor' => Instructor::create($request->all())], 201);
     }
 
     /**
