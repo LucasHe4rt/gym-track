@@ -16,3 +16,18 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->group([
+        'namespace' => 'Instructor',
+        'prefix' => 'instructors'
+    ], function () use ($router) {
+        $router->get('/', 'InstructorController@index');
+        $router->get('/{id}', 'InstructorController@show');
+        $router->post('/', 'InstructorController@store');
+        $router->put('/{id}', 'InstructorController@update');
+        $router->delete('/{id}', 'InstructorController@delete');
+    });
+});
+
