@@ -16,7 +16,7 @@ class GymController extends Controller
     /**
      * @OA\Info(
      *      title="Gym-track API",
-     *      version="0.1"
+     *      version="0.2"
      * )
      */
 
