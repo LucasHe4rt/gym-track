@@ -307,12 +307,12 @@ class GymController extends Controller
     /**
      * @OA\Get(
      *      tags={"Academias"},
-     *      summary="Lista todos os academias",
+     *      summary="Lista todos as academias",
      *      path="/api/gyms",
-     *      description="Array de objetos contendo todos os academias cadastrados",
+     *      description="Array de objetos contendo todos as academias cadastrados",
      *      @OA\Response(
      *          response="200",
-     *          description="Retorna todos os instrutores cadastrados"
+     *          description="Retorna todos as academia cadastrados"
      *      ),
      *     @OA\Response(
      *          response="500",
@@ -351,7 +351,7 @@ class GymController extends Controller
      *      ),
      *     @OA\Response (
      *          response="404",
-     *          description="Instrutor não encontrado"
+     *          description="Academia não encontrado"
      *     ),
      *     @OA\Response(
      *          response="500",
@@ -389,7 +389,7 @@ class GymController extends Controller
      *      ),
      *      @OA\Response(
      *          response="200",
-     *          description="Deleta o academia"
+     *          description="Deleta a academia"
      *      ),
      *     @OA\Response (
      *          response="404",
