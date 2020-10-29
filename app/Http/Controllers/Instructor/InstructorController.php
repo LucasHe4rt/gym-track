@@ -12,14 +12,6 @@ use Illuminate\Validation\Rule;
 
 class InstructorController extends Controller
 {
-
-    /**
-     * @OA\Info(
-     *      title="Gym-track API",
-     *      version="0.1"
-     * )
-     */
-
     /**
      * @OA\Get(
      *     tags={"Instrutores"},
