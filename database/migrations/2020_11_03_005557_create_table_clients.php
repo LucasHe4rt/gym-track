@@ -17,7 +17,9 @@ class CreateTableClients extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
             $table->date('birthday');
+            $table->string('sex');
             $table->string('neighborhood');
             $table->string('street');
             $table->integer('number');
@@ -26,7 +28,7 @@ class CreateTableClients extends Migration
             $table->string('city');
             $table->string('phone')->nullable();
             $table->string('height')->nullable();
-            $table->string('blood')->nullable();
+            $table->string('blood', 3)->nullable();
             $table->float('weight')->nullable();
             $table->foreignId('gym_id')->constrained('gyms')->onDelete('cascade');
             $table->timestamps();
