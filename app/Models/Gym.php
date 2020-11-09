@@ -24,4 +24,11 @@ class Gym extends Model
     protected $hidden = [
         'password',
     ];
+
+
+    public function clients(){
+        return $this->hasMany(Client::class);
+    }
+
+
 }
