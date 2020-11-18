@@ -469,9 +469,8 @@ class ClientController extends Controller
      */
     public function index(){
         try {
-            $clients = $this->client->all();
+            $clients = $this->client->paginate(10);
             $clients->load('medicalConditions', 'emergencyContacts');
-
 
             return response()->json(compact('clients'), 200);
         } catch (\Exception $e) {

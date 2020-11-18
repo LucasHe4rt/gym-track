@@ -15,7 +15,7 @@ class Client extends Model
      */
     protected $fillable = [
         'name', 'neighborhood', 'street', 'number', 'complement', 'zipcode', 'city', 'phone', 'email', 'password',
-        'birthday', 'sex', 'neighborhood', 'height', 'blodd', 'weight', 'gym_id'
+        'birthday', 'sex', 'height', 'blood', 'weight', 'gym_id'
     ];
 
     /**
