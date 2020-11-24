@@ -49,20 +49,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         'prefix' => 'clients'
     ], function () use ($router) {
 
-        $router->group(['prefix' => 'emergency'], function () use ($router) {
-            $router->get('/', 'EmergencyController@index');
-            $router->get('/{id}', 'EmergencyController@show');
-            $router->post('/', 'EmergencyController@store');
-            $router->put('/{id}', 'EmergencyController@update');
-            $router->delete('/{id}', 'EmergencyController@delete');
+        $router->group(['prefix' => 'contacts'], function () use ($router) {
+            $router->get('/', 'EmergencyContactsController@index');
+            $router->get('/{id}', 'EmergencyContactsController@show');
+            $router->post('/', 'EmergencyContactsController@store');
+            $router->put('/{id}', 'EmergencyContactsController@update');
+            $router->delete('/{id}', 'EmergencyContactsController@delete');
         });
 
-        $router->group(['prefix' => 'contact'], function () use ($router) {
-            $router->get('/', 'ContactController@index');
-            $router->get('/{id}', 'ContactController@show');
-            $router->post('/', 'ContactController@store');
-            $router->put('/{id}', 'ContactController@update');
-            $router->delete('/{id}', 'ContactController@delete');
+        $router->group(['prefix' => 'conditions'], function () use ($router) {
+            $router->get('/', 'MedicalConditionsController@index');
+            $router->get('/{id}', 'MedicalConditionsController@show');
+            $router->post('/', 'MedicalConditionsController@store');
+            $router->put('/{id}', 'MedicalConditionsController@update');
+            $router->delete('/{id}', 'MedicalConditionsController@delete');
         });
 
         $router->get('/', 'ClientController@index');
