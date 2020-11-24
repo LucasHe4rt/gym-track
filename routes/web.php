@@ -43,5 +43,32 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('/{id}', 'InstructorController@update');
         $router->delete('/{id}', 'InstructorController@delete');
     });
-});
 
+    $router->group([
+        'namespace' => 'Client',
+        'prefix' => 'clients'
+    ], function () use ($router) {
+
+        $router->group(['prefix' => 'contacts'], function () use ($router) {
+            $router->get('/', 'EmergencyContactsController@index');
+            $router->get('/{id}', 'EmergencyContactsController@show');
+            $router->post('/', 'EmergencyContactsController@store');
+            $router->put('/{id}', 'EmergencyContactsController@update');
+            $router->delete('/{id}', 'EmergencyContactsController@delete');
+        });
+
+        $router->group(['prefix' => 'conditions'], function () use ($router) {
+            $router->get('/', 'MedicalConditionsController@index');
+            $router->get('/{id}', 'MedicalConditionsController@show');
+            $router->post('/', 'MedicalConditionsController@store');
+            $router->put('/{id}', 'MedicalConditionsController@update');
+            $router->delete('/{id}', 'MedicalConditionsController@delete');
+        });
+
+        $router->get('/', 'ClientController@index');
+        $router->get('/{id}', 'ClientController@show');
+        $router->post('/', 'ClientController@store');
+        $router->put('/{id}', 'ClientController@update');
+        $router->delete('/{id}', 'ClientController@delete');
+        });
+});
