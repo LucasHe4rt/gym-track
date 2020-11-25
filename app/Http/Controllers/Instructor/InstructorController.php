@@ -7,6 +7,7 @@ use \App\Http\Controllers\Controller;
 use App\Models\Instructor;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -152,7 +153,7 @@ class InstructorController extends Controller
      *          description="Retorna o instrutor que foi criado."
      *      ),
      *     @OA\Response (
-     *          response="400",
+     *          response="422",
      *          description="Parametros reprovaram na validação."
      *     ),
      *     @OA\Response (
@@ -164,17 +165,24 @@ class InstructorController extends Controller
 
     public function store(Request $request)
     {
-        $validator = $this->validateRequest($request->all());
+        try {
+            $validator = $this->validateRequest($request->all());
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $request['password'] = Hash::make($request['password']);
+
+            return response()->json(['instructor' => Instructor::create($request->all())], 201);
+        } catch (\Exception $exception)
+        {
+            return response($exception->getMessage(), 500);
         }
-
-        return response()->json(['instructor' => Instructor::create($request->all())], 201);
     }
 
-    /**
-     * @OA\Put(
+        /**
+         * @OA\Put(
      *     tags={"Instrutores"},
      *      summary="Atualiza um instrutor",
      *      path="/api/instructors/{id}",
@@ -279,6 +287,7 @@ class InstructorController extends Controller
                 return response($validator->errors(), 422);
             }
 
+            $request['password'] = Hash::make($request['password']);
             $instructor->update($request->all());
 
             return response()->json(['instructor' => $instructor], 200);
