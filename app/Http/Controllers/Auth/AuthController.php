@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:client', ['except' => ['login']]);
+        $this->middleware('auth:gym', ['except' => ['login']]);
     }
 
     /**
@@ -25,8 +25,7 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth(request('type'))->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 

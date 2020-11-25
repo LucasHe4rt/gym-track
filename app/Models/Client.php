@@ -48,10 +48,6 @@ class Client extends Model implements AuthenticatableContract, AuthorizableContr
         return $this->hasMany(MedicalConditions::class);
     }
 
-
-
-    // Rest omitted for brevity
-
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

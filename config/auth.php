@@ -46,6 +46,10 @@ return [
             'driver' => 'jwt',
             'provider' => 'gyms',
         ],
+        'instructor' => [
+            'driver' => 'jwt',
+            'provider' => 'instructors',
+        ],
     ],
 
 
@@ -75,6 +79,10 @@ return [
         'gyms' => [
             'driver' => 'eloquent',
             'model' => App\Models\Gym::class,
+        ],
+        'instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Instructor::class,
         ],
     ],
 
