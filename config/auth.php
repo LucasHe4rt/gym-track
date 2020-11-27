@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'client',
-        'passwords' => 'clients',
+        'guard' => 'gym',
+        'passwords' => ['clients', 'gyms', 'instructors'],
     ],
 
     /*
