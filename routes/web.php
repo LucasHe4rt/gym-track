@@ -37,7 +37,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         'prefix' => 'instructors'
     ], function () use ($router)
     {
-        $router->get('/', 'InstructorController@index');
+        $router->get('/gym/{gym_id}', 'InstructorController@index');
         $router->get('/{id}', 'InstructorController@show');
         $router->post('/', 'InstructorController@store');
         $router->put('/{id}', 'InstructorController@update');
@@ -65,7 +65,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->delete('/{id}', 'MedicalConditionsController@delete');
         });
 
-        $router->get('/', 'ClientController@index');
+        $router->get('/gym/{gym_id}', 'ClientController@index');
         $router->get('/{id}', 'ClientController@show');
         $router->post('/', 'ClientController@store');
         $router->put('/{id}', 'ClientController@update');

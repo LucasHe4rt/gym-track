@@ -17,8 +17,18 @@ class InstructorController extends Controller
      * @OA\Get(
      *     tags={"Instrutores"},
      *      summary="Lista todos os instrutores",
-     *      path="/api/instructors",
-     *      description="Array de objetos contendo todos os intrutores cadastrados",
+     *      path="/api/instructors/gym/{gym_id}",
+     *      description="Array de objetos contendo todos os intrutores cadastrados pelo gym_id",
+     *      @OA\Parameter (
+     *          name="gym_id",
+     *          in="path",
+     *          description="Gym id",
+     *          required=true,
+     *          @OA\Schema (
+     *              type="integer",
+     *              format="int64"
+     *          ),
+     *      ),
      *      @OA\Response(
      *          response="200",
      *          description="Retorna todos os instrutores cadastrados"
@@ -29,11 +39,12 @@ class InstructorController extends Controller
      *     )
      * )
      */
-
-    public function index()
+    public function index(int $gym_id)
     {
         try {
-            return response()->json(['instructors' => Instructor::all()], 200);
+            $instructors = Instructor::where('gym_id', $gym_id)->paginate(10);
+
+            return response()->json(['instructors' => $instructors], 200);
         }
         catch (\Exception $exception)
         {
