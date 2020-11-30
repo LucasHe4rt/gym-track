@@ -455,8 +455,18 @@ class ClientController extends Controller
      * @OA\Get(
      *      tags={"Clientes"},
      *      summary="Lista todos os clientes",
-     *      path="/api/clients",
-     *      description="Array de objetos contendo todos os clientes cadastrados",
+     *      path="/api/clients/gym/{gym_id}",
+     *      description="Array de objetos contendo todos os clientes cadastrados por academia",
+     *      @OA\Parameter (
+     *          name="gym_id",
+     *          in="path",
+     *          description="Gym id",
+     *          required=true,
+     *          @OA\Schema (
+     *              type="integer",
+     *              format="int64"
+     *          ),
+     *      ),
      *      @OA\Response(
      *          response="200",
      *          description="Retorna todos os clientes cadastrados"
@@ -467,9 +477,9 @@ class ClientController extends Controller
      *      ),
      * )
      */
-    public function index(){
+    public function index(int $gym_id){
         try {
-            $clients = $this->client->paginate(10);
+            $clients = $this->client->where('gym_id', $gym_id)->paginate(10);
             $clients->load('medicalConditions', 'emergencyContacts');
 
             return response()->json(compact('clients'), 200);
