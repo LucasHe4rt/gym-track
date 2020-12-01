@@ -71,7 +71,7 @@ class EmergencyContactsController
      *               @OA\Property(
      *                   property="phone",
      *                   description="Telefone do contato",
-     *                   type="integer"
+     *                   type="string"
      *               ),
      *               @OA\Property(
      *                   property="client_id",
@@ -174,7 +174,7 @@ class EmergencyContactsController
      *               @OA\Property(
      *                   property="phone",
      *                   description="Telefone do contato",
-     *                   type="integer"
+     *                   type="string"
      *               ),
      *               @OA\Property(
      *                   property="client_id",

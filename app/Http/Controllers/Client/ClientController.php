@@ -102,7 +102,7 @@ class ClientController extends Controller
      *               @OA\Property(
      *                   property="phone",
      *                   description="Telefone do cliente",
-     *                   type="integer"
+     *                   type="string"
      *               ),
      *              @OA\Property(
      *                   property="height",
@@ -314,7 +314,7 @@ class ClientController extends Controller
      *               @OA\Property(
      *                   property="phone",
      *                   description="Telefone do cliente",
-     *                   type="integer"
+     *                   type="string"
      *               ),
      *              @OA\Property(
      *                   property="height",
