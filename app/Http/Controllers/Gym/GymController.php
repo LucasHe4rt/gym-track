@@ -116,8 +116,7 @@ class GymController extends Controller
      *          description="Telefone da academia",
      *          required=false,
      *          @OA\Schema (
-     *              type="integer",
-     *              format="int64"
+     *              type="string"
      *          )
      *      ),
      *     @OA\Parameter (
@@ -252,8 +251,7 @@ class GymController extends Controller
      *          description="Telefone da academia",
      *          required=false,
      *          @OA\Schema (
-     *              type="integer",
-     *              format="int64"
+     *              type="string"
      *          )
      *      ),
      *     @OA\Parameter (

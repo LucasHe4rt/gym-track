@@ -124,8 +124,7 @@ class InstructorController extends Controller
      *          description="telefone do instrutor",
      *          required=false,
      *          @OA\Schema (
-     *              type="integer",
-     *              format="int64"
+     *              type="string"
      *          )
      *      ),
      *     @OA\Parameter (
@@ -232,8 +231,7 @@ class InstructorController extends Controller
      *          description="telefone do instrutor",
      *          required=false,
      *          @OA\Schema (
-     *              type="integer",
-     *              format="int64"
+     *              type="string"
      *          )
      *      ),
      *     @OA\Parameter (
@@ -366,7 +364,7 @@ class InstructorController extends Controller
         return Validator::make($request, [
             'name' => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('instructors')->ignore($id)],
-            'phone' => 'nullable|numeric',
+            'phone' => 'nullable',
             'password' => 'required|string|max:255',
             'arrive' => 'required|date_format:H:i|before:leave',
             'leave' => 'required|date_format:H:i|after:arrive',
