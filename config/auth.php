@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
-        'passwords' => 'users',
+        'guard' => 'gym',
+        'passwords' => ['clients', 'gyms', 'instructors'],
     ],
 
     /*
@@ -42,9 +42,13 @@ return [
             'driver' => 'jwt',
             'provider' => 'clients',
         ],
-        'user' => [
+        'gym' => [
             'driver' => 'jwt',
             'provider' => 'gyms',
+        ],
+        'instructor' => [
+            'driver' => 'jwt',
+            'provider' => 'instructors',
         ],
     ],
 
@@ -75,6 +79,10 @@ return [
         'gyms' => [
             'driver' => 'eloquent',
             'model' => App\Models\Gym::class,
+        ],
+        'instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Instructor::class,
         ],
     ],
 
