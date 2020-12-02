@@ -16,3 +16,71 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+    $router->group([
+        'prefix' => 'auth',
+        'namespace' => 'Auth'
+    ], function ($router) {
+        $router->post('login', 'AuthController@login');
+        $router->post('logout', 'AuthController@logout');
+        $router->post('refresh', 'AuthController@refresh');
+        $router->post('me', 'AuthController@me');
+    });
+
+
+
+    $router->group([
+        'prefix' => 'gyms',
+        'namespace' => 'Gym'
+    ], function () use ($router)
+    {
+        $router->get('/', 'GymController@index');
+        $router->get('/{id}', 'GymController@show');
+        $router->post('/', 'GymController@store');
+        $router->put('/{id}', 'GymController@update');
+        $router->delete('/{id}', 'GymController@delete');
+    });
+
+    $router->group([
+        'namespace' => 'Instructor',
+        'prefix' => 'instructors'
+    ], function () use ($router)
+    {
+        $router->get('/gym/{gym_id}', 'InstructorController@index');
+        $router->get('/{id}', 'InstructorController@show');
+        $router->post('/', 'InstructorController@store');
+        $router->put('/{id}', 'InstructorController@update');
+        $router->delete('/{id}', 'InstructorController@delete');
+    });
+
+    $router->group([
+        'namespace' => 'Client',
+        'prefix' => 'clients'
+    ], function () use ($router) {
+
+        $router->group(['prefix' => 'contacts'], function () use ($router) {
+            $router->get('/', 'EmergencyContactsController@index');
+            $router->get('/{id}', 'EmergencyContactsController@show');
+            $router->post('/', 'EmergencyContactsController@store');
+            $router->put('/{id}', 'EmergencyContactsController@update');
+            $router->delete('/{id}', 'EmergencyContactsController@delete');
+        });
+
+        $router->group(['prefix' => 'conditions'], function () use ($router) {
+            $router->get('/', 'MedicalConditionsController@index');
+            $router->get('/{id}', 'MedicalConditionsController@show');
+            $router->post('/', 'MedicalConditionsController@store');
+            $router->put('/{id}', 'MedicalConditionsController@update');
+            $router->delete('/{id}', 'MedicalConditionsController@delete');
+        });
+
+        $router->get('/gym/{gym_id}', 'ClientController@index');
+        $router->get('/{id}', 'ClientController@show');
+        $router->post('/', 'ClientController@store');
+        $router->put('/{id}', 'ClientController@update');
+        $router->delete('/{id}', 'ClientController@delete');
+        });
+});
